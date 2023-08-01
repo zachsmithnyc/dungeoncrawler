@@ -9,11 +9,11 @@ class Character:
       self.hp = level * 10
       self.max_hp = self.hp
       self.attack = level * 5
-    if self.job == 'thief':
+    elif self.job == 'thief':
       self.hp = level * 7
       self.max_hp = self.hp
       self.attack = level * 3
-    if self.job == 'healer':
+    else:
       self.hp = level * 5
       self.max_hp = self.hp
       self.attack = level * 1
@@ -27,6 +27,13 @@ class Character:
 
 class Monster:
   # creates monsters for characters to fight
-  def __init__(self, type):
-    self.type = type
+  def __init__(self, name):
+    self.name = name
+    
+    if self.name == 'ogre':
+      self.power = 5
+    elif self.name == 'wolf':
+      self.power = 3
+    else:
+      self.power = 1
     
