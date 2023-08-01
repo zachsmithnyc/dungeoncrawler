@@ -5,15 +5,15 @@ class Character:
     self.job = job
     self.level = level
     
-    if self.job = 'warrior':
+    if self.job == 'warrior':
       self.hp = level * 10
       self.max_hp = self.hp
       self.attack = level * 5
-    if self.job = 'thief':
+    if self.job == 'thief':
       self.hp = level * 7
       self.max_hp = self.hp
       self.attack = level * 3
-    if self.job = 'healer':
+    if self.job == 'healer':
       self.hp = level * 5
       self.max_hp = self.hp
       self.attack = level * 1
@@ -23,8 +23,10 @@ class Character:
 
   # method for attacking 
   def attack (self, monster):
+    pass
+
 class Monster:
   # creates monsters for characters to fight
-
   def __init__(self, type):
-    self.type = type    
+    self.type = type
+    
