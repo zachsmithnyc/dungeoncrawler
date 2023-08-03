@@ -86,11 +86,14 @@ class Monster:
       self.item = 'potion'
     if self.name == 'wolf':
       self.power = 3
-      self.item == 'wolf teeth'
+      self.item = 'wolf teeth'
     if self.name == 'fairy':
       self.power = 1
-      self.item == 'antidote'
+      self.item = 'antidote'
 
+  def __repr__(self):
+    return "{name} has {power} power and is holding {item}.".format(name = self.name, power = self.power, item = self.item)
+  
   #method for attacking 
   def attack(self, target):
     target.lose_hp(self.power)
@@ -107,12 +110,16 @@ class Monster:
 warrior = Character('Samson', 'warrior')
 thief = Character('Clyde', 'thief')
 cleric = Character('Sheila', 'cleric')
+ogre = Monster('ogre')
+wolf = Monster('wolf')
+fairy = Monster('fairy')
 
 print(warrior.__repr__())
 print(thief.__repr__())
 print(cleric.__repr__())
-warrior.attack(thief)
-warrior.attack(thief)
-cleric.heal(thief)
+print(ogre.__repr__())
+print(wolf.__repr__())
+print(fairy.__repr__())
+
 
     
