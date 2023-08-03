@@ -25,6 +25,10 @@ class Character:
   def attack (self, monster):
     pass
 
+  # method for stealing 
+
+  # method for healing 
+
 class Monster:
   # creates monsters for characters to fight
   def __init__(self, name):
@@ -36,4 +40,11 @@ class Monster:
       self.power = 3
     else:
       self.power = 1
+
+    if self.name == 'ogre':
+      self.item = 'potion'
+    if self.name == 'wolf':
+      self.item == 'wolf teeth'
+    else:
+      self.item == 'antidote'
     
