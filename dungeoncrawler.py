@@ -4,6 +4,7 @@ class Character:
     self.name = name 
     self.job = job
     self.level = level
+    self.items = []
     self.is_knocked_out = False
     
     if self.job == 'warrior':
@@ -73,38 +74,72 @@ class Character:
 
   # method for stealing 
   def steal(self, target):
-    pass
-
+    if len(target.items) >= 1:
+      self.items.append(target.items.pop(0))
+      print(f'{self.name} steals {self.items[0]} from {target.name}')
+    else:
+      print(f'{self.name} could not steal anything')
 
 class Monster:
   # creates monsters for characters to fight
   def __init__(self, name):
     self.name = name
-    
+    self.items = []
+    self.is_knocked_out = False
     if self.name == 'ogre':
       self.power = 5
-      self.item = 'potion'
+      self.hp = 10
+      self.items.append('potion')
     if self.name == 'wolf':
       self.power = 3
-      self.item = 'wolf teeth'
+      self.hp = 5
+      self.items.append('wolf teeth')
     if self.name == 'fairy':
       self.power = 1
-      self.item = 'antidote'
+      self.hp = 3
+      self.items.append('antidote')
 
   def __repr__(self):
-    return "{name} has {power} power and is holding {item}.".format(name = self.name, power = self.power, item = self.item)
+    return "{name} has {power} power and is holding {item}.".format(name = self.name, power = self.power, item = self.items[0])
   
-  #method for attacking 
+  # method for knock out
+  def knock_out(self):
+    # sets knock out status to true 
+    self.is_knocked_out = True
+
+    if self.hp != 0:
+      self.hp = 0
+    
+    print(f"{self.name} was knocked out!")
+
+  # method for losing health
+  def lose_hp(self, amount):
+    self.hp -= amount
+    if self.hp <= 0:
+      self.hp = 0
+      self.knock_out()
+    else:
+      print(f"{self.name} hp was reduced to {self.hp}")
+
+  # method for gaining health
+  def gain_hp(self, amount):
+    self.hp += amount
+
+    #checks knock our status and flips it to false on heal 
+    if self.is_knocked_out == True:
+      self.revive()
+
+    print(f"{self.name} now has {self.hp} hit points!")
+  
+  # method for attacking
   def attack(self, target):
+    print(f"{self.name} attacked {target.name}!")
     target.lose_hp(self.power)
 
-  #method for aoe attack
-  def poison(self, target):
-    pass
-
-  #method for healing
-  def heal(self, target):
-    pass
+  def poison(self, targets):
+    print('{name} used poison!'.format(name = self.name))
+    for target in targets: 
+      target.lose_hp(2)
 
 
 warrior = Character('Samson', 'warrior')
@@ -114,6 +149,10 @@ ogre = Monster('ogre')
 wolf = Monster('wolf')
 fairy = Monster('fairy')
 
+# could build this out and put these in a turn or round object. Battle object?
+characters = [warrior, thief, cleric]
+monsters = [ogre, wolf, fairy]
+
 print(warrior.__repr__())
 print(thief.__repr__())
 print(cleric.__repr__())
@@ -121,5 +160,11 @@ print(ogre.__repr__())
 print(wolf.__repr__())
 print(fairy.__repr__())
 
-
+thief.steal(ogre)
+thief.steal(ogre)
+ogre.attack(warrior)
+warrior.attack(ogre)
+fairy.poison(characters)
+cleric.heal(warrior)
+warrior.attack(wolf)
     
