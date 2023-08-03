@@ -4,26 +4,47 @@ class Character:
     self.name = name 
     self.job = job
     self.level = level
+    self.is_knocked_out = False
     
     if self.job == 'warrior':
       self.hp = level * 10
       self.max_hp = self.hp
-      self.attack = level * 5
+      self.power = level * 5
     elif self.job == 'thief':
       self.hp = level * 7
       self.max_hp = self.hp
-      self.attack = level * 3
+      self.power = level * 3
     else:
       self.hp = level * 5
       self.max_hp = self.hp
-      self.attack = level * 1
+      self.power = level * 1
   
   def __repr__(self):
     return f"{self.name} is a level {self.level} {self.job} with {self.hp} hit points."
+  
+  # method for knock out
+  def knock_out(self):
+    # sets knock out status to true 
+    self.is_knocked_out = True
 
-  # method for attacking 
+  # method for losing health
   def lose_hp(self, amount):
     self.hp -= amount
+    if self.hp <= 0:
+      self.hp = 0
+      self.knock_out()
+
+  # method for gaining health
+  def gain_hp(self, amount):
+    self.hp += amount
+
+    #checks knock our status and flips it to false on heal 
+    if self.is_knocked_out == True:
+      self.is_knocked_out == False
+    if self.hp >= self.max_hp:
+      self.hp = self.max_hp
+
+    print(f"{self.name} was healed {amount} points!")
      
 
   # method for stealing 
