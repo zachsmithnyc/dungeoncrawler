@@ -22,12 +22,17 @@ class Character:
     return f"{self.name} is a level {self.level} {self.job} with {self.hp} hit points."
 
   # method for attacking 
-  def attack (self, monster):
+  def attack (self, target):
     pass
 
   # method for stealing 
+  def heal(self, target):
+    pass
 
   # method for healing 
+  def steal(self, target):
+    pass
+
 
 class Monster:
   # creates monsters for characters to fight
@@ -47,4 +52,16 @@ class Monster:
       self.item == 'wolf teeth'
     else:
       self.item == 'antidote'
+
+  #method for attacking 
+  def attack(self, target):
+    pass
+
+  #method for aoe attack
+  def aoe_attack(self, target):
+    pass
+
+  #method for healing
+  def heal(self, target):
+    pass
     
