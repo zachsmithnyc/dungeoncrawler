@@ -116,7 +116,7 @@ class Monster:
 
   # method for losing health
   def lose_hp(self, amount):
-    self.hp -= amount
+    self.hp -= random.randing(1, amount)
     if self.hp <= 0:
       self.hp = 0
       self.knock_out()
