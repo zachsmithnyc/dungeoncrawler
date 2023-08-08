@@ -1,3 +1,5 @@
+import random
+
 class Character:
   # creates a new character
   def __init__(self, name, job, level = 1):
@@ -45,7 +47,7 @@ class Character:
 
   # method for losing health
   def lose_hp(self, amount):
-    self.hp -= amount
+    self.hp -= random.randint(1, amount)
     if self.hp <= 0:
       self.hp = 0
       self.knock_out()
